@@ -6,7 +6,6 @@
 #include <memory>
 #include <ctime>
 
-
 #ifdef _WIN32
 #include <windows.h>
 
