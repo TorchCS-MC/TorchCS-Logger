@@ -68,7 +68,8 @@ void CustomFormatter::format(const spdlog::details::log_msg& msg, spdlog::memory
             log_level = "CRITICAL"; break;
         case spdlog::level::trace:
             log_level = "TRACE"; break;
-        default: log_level = "UNKNOWN"; break;
+        default:
+            log_level = "UNKNOWN"; break;
     }
 
     std::string formatted_message = convert_minecraft_colors(fmt::to_string(msg.payload));
