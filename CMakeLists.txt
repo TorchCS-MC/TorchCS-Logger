@@ -12,6 +12,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(OUTPUT_DIR "${CMAKE_BINARY_DIR}/out/${CMAKE_SYSTEM_PROCESSOR}/${CMAKE_SYSTEM_NAME}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
+
 find_package(spdlog CONFIG REQUIRED)
 
 option(BUILD_SHARED_LIBS "Build as a shared library (.so/.dll instead of .a/.lib)" OFF)

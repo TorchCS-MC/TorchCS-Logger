@@ -1,6 +1,5 @@
 #include "LoggerOptions.hpp"
 
-
 void LoggerOptions::setLogPath(fs::path path) {
     log_path = path;
 }
