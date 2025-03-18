@@ -11,19 +11,17 @@ int main() {
     options.setLogPath("Logs");
 
     LoggerManager logger("SERVER");
-
     logger.load_options(options);
+    logger.info("Hello", "Hello World");
 
-    logger.file_logging(true);
+    logger.console_logging(false);
 
-    logger.info("TEST", LogColor::BLUE + "Hello World");
+    auto test = LoggerManager::getInstance("SERVER");
 
-    logger.info("dedicated::start", "§8[§6Stay§eCation§8]§7 Hello World");
 
-    logger.info("dedicated::start", "§8[§6Stay§eCation§8]§7 Hello World");
+    logger.info("Hello", "Hello Wddddddddorld");
 
-    logger.info("dedicated::stop", "§8[§6Stay§eCation§8]§7 Hello World");
-    logger.info("dedicated::cool", "§8[§6Stay§eCation§8]§7 Hello World");
+
 
 
 

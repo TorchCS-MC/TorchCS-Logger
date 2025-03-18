@@ -35,8 +35,6 @@ std::string strip_minecraft_colors(const std::string& input) {
     return result;
 }
 
-
-
 std::unordered_map<std::string, std::shared_ptr<LoggerManager>> LoggerManager::instances;
 std::mutex LoggerManager::instance_mutex;
 
