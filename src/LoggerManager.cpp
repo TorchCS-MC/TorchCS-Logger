@@ -111,7 +111,11 @@ void LoggerManager::Log(LogLevel level, const std::string& key, const std::strin
         auto t = std::chrono::system_clock::to_time_t(now);
         std::tm tm_buf;
 
-        localtime_s(&tm_buf, &t);
+#ifdef _WIN32
+    localtime_s(&tm_buf, &t); 
+#else
+    localtime_r(&t, &tm_buf); 
+#endif
 
         char date_buffer[11];
         std::strftime(date_buffer, sizeof(date_buffer), "%Y-%m-%d", &tm_buf);

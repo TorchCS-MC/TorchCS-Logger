@@ -23,6 +23,7 @@ const std::unordered_map<char, std::string> MC_COLORS = {
 };
 
 std::string CustomFormatter::convert_minecraft_colors(const std::string& input) {
+
     std::string result;
     size_t len = input.length();
 
@@ -48,7 +49,12 @@ std::string CustomFormatter::convert_minecraft_colors(const std::string& input) 
 void CustomFormatter::format(const spdlog::details::log_msg& msg, spdlog::memory_buf_t& dest) {
     auto t = std::chrono::system_clock::to_time_t(msg.time);
     std::tm tm_buf;
+
+#ifdef _WIN32
     localtime_s(&tm_buf, &t);
+#else
+    localtime_r(&t, &tm_buf);   
+#endif
 
     char time_buffer[20];
     std::strftime(time_buffer, sizeof(time_buffer), "%Y-%m-%d %H:%M:%S", &tm_buf);
