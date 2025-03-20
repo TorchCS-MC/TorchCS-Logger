@@ -1,6 +1,5 @@
 #include <CustomFormatter.hpp>
 
-
 const std::unordered_map<char, std::string> MC_COLORS = {
         {'0', "\033[30m"},
         {'1', "\033[34m"},

@@ -1,45 +1,40 @@
 cmake_minimum_required(VERSION 3.27)
-project(TorchCS-Logger)
-
-include(${CMAKE_BINARY_DIR}/generators/conan_toolchain.cmake)
+project(TorchCS-Logger VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+option(TORCHCS_LOGGER_INSTALL "Enable installation of TorchCS-Logger" ON)
+option(TORCHCS_LOGGER_SHARED "Build TorchCS-Logger as a shared library (.so/.dll)" OFF)
+option(TORCHCS_LOGGER_STATIC "Build TorchCS-Logger as a static library (.a/.lib)" ON)
+option(TORCHCS_LOGGER_EXECUTABLE "Build TorchCS-Logger as an executable" OFF)
+
+if(TORCHCS_LOGGER_SHARED AND TORCHCS_LOGGER_STATIC)
+    message(FATAL_ERROR "Both TORCHCS_LOGGER_SHARED and TORCHCS_LOGGER_STATIC are enabled. Choose only one.")
+endif()
+
+if(TORCHCS_LOGGER_SHARED)
+    set(LIBRARY_TYPE SHARED)
+    message(STATUS "Building TorchCS-Logger as a shared library")
+elseif(TORCHCS_LOGGER_STATIC)
+    set(LIBRARY_TYPE STATIC)
+    message(STATUS "Building TorchCS-Logger as a static library")
+else()
+    message(FATAL_ERROR "Either TORCHCS_LOGGER_SHARED or TORCHCS_LOGGER_STATIC must be enabled.")
+endif()
 
 find_package(spdlog CONFIG REQUIRED)
 
-option(BUILD_SHARED_LIBS "Build as a shared library (.so/.dll instead of .a/.lib)" OFF)
-option(BUILD_TESTS "Enable tests" ON)
-
-add_library(TorchCS-Logger
-        src/LoggerManager.cpp
-        src/LoggerOptions.cpp
-        src/CustomFormatter.cpp
-        src/LogColor.cpp
+add_library(TorchCS-Logger ${LIBRARY_TYPE}
+    src/LoggerManager.cpp
+    src/LoggerOptions.cpp
+    src/CustomFormatter.cpp
+    src/LogColor.cpp
 )
 
 target_include_directories(TorchCS-Logger PUBLIC include)
 target_link_libraries(TorchCS-Logger PRIVATE spdlog::spdlog)
-
-install(TARGETS TorchCS-Logger
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
-        PUBLIC_HEADER DESTINATION include
-)
-
-if(WIN32)
-    message(STATUS "Configuring for Windows...")
-    add_definitions(-D_WIN32)
-elseif(UNIX)
-    message(STATUS "Configuring for Linux...")
-    target_link_libraries(TorchCS-Logger PRIVATE pthread)
-endif()
 
 if(TARGET TorchCS-Logger)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -49,9 +44,31 @@ if(TARGET TorchCS-Logger)
     endif()
 endif()
 
-if(BUILD_TESTS)
-    enable_testing()
-    add_executable(TorchCS-Logger_Test tests/main.cpp)
-    target_link_libraries(TorchCS-Logger_Test PRIVATE TorchCS-Logger spdlog::spdlog)
-    add_test(NAME LoggerTests COMMAND TorchCS-Logger_Test)
+
+if(TORCHCS_LOGGER_EXECUTABLE)
+    message(STATUS "Building TorchCS-Logger as an executable")
+
+    add_executable(TorchCS-Logger-Executable tests/main.cpp)
+
+    target_include_directories(TorchCS-Logger-Executable PRIVATE include)
+    target_link_libraries(TorchCS-Logger-Executable PRIVATE TorchCS-Logger spdlog::spdlog)
+
+    if(TORCHCS_LOGGER_INSTALL)
+        install(TARGETS TorchCS-Logger-Executable
+            RUNTIME DESTINATION bin
+        )
+    endif()
+endif()
+
+if(TORCHCS_LOGGER_INSTALL)
+    message(STATUS "Installing TorchCS-Logger")
+
+    install(TARGETS TorchCS-Logger
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        PUBLIC_HEADER DESTINATION include
+    )
+
+    install(DIRECTORY include/ DESTINATION include)
 endif()

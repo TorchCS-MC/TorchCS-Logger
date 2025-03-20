@@ -2,6 +2,7 @@
 #include <LoggerManager.hpp>
 #include <LoggerOptions.hpp>
 
+
 #include <LogColor.hpp>
 
 int main() {
