@@ -1,4 +1,4 @@
-#include <LogColor.hpp>
+#include <TorchCS-Logger/LogColor.hpp>
 
 const std::string LogColor::BLACK = "§0";
 const std::string LogColor::DARK_BLUE = "§1";
