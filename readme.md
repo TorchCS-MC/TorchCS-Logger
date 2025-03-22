@@ -51,6 +51,27 @@ TorchCS Logger is an extension of spdlog. It is generally used for console appli
     ```
 
 ---
+## Your Project
+
+- Conan
+   - `conanfile.py`
+     **Code:**
+     ```sh
+     self.requires("torchcs-logger/1.0.0")
+     ```
+
+- CMake
+   - `CMakeLists.txt`
+     **Code:**
+     ```cmake
+     find_package(torchcs-logger CONFIG REQUIRED)
+     target_link_libraries(${PROJECT_NAME} PRIVATE torchcs-logger::torchcs-logger)
+     target_link_libraries(${PROJECT_NAME} PRIVATE TorchCS-Logger.lib)
+     ```
+
+
+
+---
 ## License
 This project is licensed under the **MIT License**.  
 See the [LICENSE](LICENSE) file for more details.
