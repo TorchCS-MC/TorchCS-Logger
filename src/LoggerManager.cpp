@@ -1,6 +1,6 @@
-#include <LoggerManager.hpp>
+#include <TorchCS-Logger/LoggerManager.hpp>
 #include <spdlog/pattern_formatter.h>
-#include <CustomFormatter.hpp>
+#include <TorchCS-Logger/CustomFormatter.hpp>
 
 #include <iostream>
 #include <memory>

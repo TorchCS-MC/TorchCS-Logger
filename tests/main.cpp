@@ -12,6 +12,7 @@ int main() {
 
     LoggerManager logger("SERVER");
 
+
     //logger.info("Hello World", "Hello World");
 
     logger.load_options(options);
