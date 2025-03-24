@@ -11,8 +11,8 @@
 #include <mutex>
 #include <filesystem>
 
-#include "LogLevel.hpp"
-#include "LoggerOptions.hpp"
+#include "log_level.hpp"
+#include "logger_options.hpp" 
 
 namespace fs = std::filesystem;
 

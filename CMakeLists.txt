@@ -27,10 +27,10 @@ endif()
 find_package(spdlog CONFIG REQUIRED)
 
 add_library(TorchCS-Logger ${LIBRARY_TYPE}
-    src/LoggerManager.cpp
-    src/LoggerOptions.cpp
-    src/CustomFormatter.cpp
-    src/LogColor.cpp
+    src/logger_manager.cpp
+    src/logger_options.cpp
+    src/custom_formatter.cpp
+    src/log_color.cpp
 )
 
 target_include_directories(TorchCS-Logger PUBLIC include)

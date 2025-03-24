@@ -1,4 +1,4 @@
-#include <TorchCS-Logger/CustomFormatter.hpp>
+#include <torchcs_logger/custom_formatter.hpp>
 
 const std::unordered_map<char, std::string> MC_COLORS = {
         {'0', "\033[30m"},

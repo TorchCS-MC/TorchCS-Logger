@@ -1,9 +1,9 @@
 #include <iostream>
-#include <LoggerManager.hpp>
-#include <LoggerOptions.hpp>
+#include <TorchCS-Logger/LoggerManager.hpp>
+#include <TorchCS-Logger/LogLevel.hpp>
+#include <TorchCS-Logger/LogColor.hpp>
+#include <TorchCS-Logger/LoggerOptions.hpp>
 
-
-#include <LogColor.hpp>
 
 int main() {
 
@@ -19,6 +19,8 @@ int main() {
     logger.info("Hello", "Hello World");
 
     logger.file_logging(true);
+
+
 
     auto test = LoggerManager::getInstance("SERVER");
 
