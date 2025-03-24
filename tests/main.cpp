@@ -1,8 +1,8 @@
 #include <iostream>
-#include <TorchCS-Logger/LoggerManager.hpp>
-#include <TorchCS-Logger/LogLevel.hpp>
-#include <TorchCS-Logger/LogColor.hpp>
-#include <TorchCS-Logger/LoggerOptions.hpp>
+#include <torchcs_logger/logger_manager.hpp>
+#include <torchcs_logger/log_level.hpp>
+#include <torchcs_logger/log_color.hpp>
+#include <torchcs_logger/logger_options.hpp>
 
 
 int main() {
@@ -11,7 +11,6 @@ int main() {
     options.setLogPath("Logs");
 
     LoggerManager logger("SERVER");
-
 
     //logger.info("Hello World", "Hello World");
 
