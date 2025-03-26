@@ -1,4 +1,4 @@
-#include <TorchCS-Logger/LoggerOptions.hpp>
+#include <torchcs_logger/logger_options.hpp>
 
 void LoggerOptions::setLogPath(fs::path path) {
     log_path = path;
